@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import ImageGenerator from './ImageGenerator';
-
+import CardGenerator from "./CardGenerator";
 const FestivalSelector = () => {
 
     const [selectedFestival, setSelectedFestival] = useState('');
+    const [writtenMessage, setWrittenMessage] = useState('');
 
     const handleFestivalChange = (event) => {
         setSelectedFestival(event.target.value);
     };
 
+    const handleCardInputChange = (event) => {
+        const { name, value } = event.target;
+        setWrittenMessage(prevFormData => ({
+            ...prevFormData,
+            [name]: value
+        }));
+    };
     return (
         <div>
             <label htmlFor="festival-select">Choose a card template:</label>
@@ -20,7 +28,11 @@ const FestivalSelector = () => {
                 <option value="tihar1">Tihar 1</option>
                 <option value="tihar2">Tihar 2</option>
             </select>
-            {selectedFestival && <ImageGenerator festival={selectedFestival} />}
+            {selectedFestival && <>
+            <ImageGenerator festival={selectedFestival} writtenMsg={writtenMessage}/>
+            <CardGenerator changeFunction={handleCardInputChange}/>
+            </> 
+            }
         </div>
     );
 };
