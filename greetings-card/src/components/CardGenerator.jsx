@@ -33,7 +33,6 @@ const CardGenerator = ({changeFunction}) => {
                 Message:
                 <textarea name="message" value={message} onChange={(event) => setMessage(event.target.value)} />
             </label>
-            <button type="submit">Generate Card</button>
 
         </form>
         </div>
